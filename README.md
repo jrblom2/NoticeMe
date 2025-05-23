@@ -2,6 +2,10 @@
 
 Some Notes about approach:
 
+This article has some good guidance but we will end up doing something pretty different:
+
+https://gmongaras.medium.com/coding-a-virtual-ai-girlfriend-f951e648aa46
+
 This project will really have two parts that should equal a conversational horn dog. The model we use to start with and then how we build the context
 
 1. The model:
@@ -9,12 +13,17 @@ This project will really have two parts that should equal a conversational horn 
     that our computers can load and either doing some sort of cross analysis between a bunch of them and the performance at the end or some sort of fine-tuning task. Fine-tuning is something we covered in class so I think David would like to see it and that could be a good focus of the project but we would need the right data and it would probably have to happen on the sheep, these models are BIG. I think 1.0-1.5B params is the sweet spot for our laptops.
 
     Some modesl to consider:
+    
     GPTNeo https://huggingface.co/EleutherAI/gpt-neo-1.3B
+
     Cursed Waifu GPTNeo https://huggingface.co/gmongaras/gpt-anime-sub-1.3B
+
     TinyLlama (my fav) https://huggingface.co/TinyLlama/TinyLlama-1.1B-Chat-v1.0
 
     Datasets (they are all what you expect):
+
     https://huggingface.co/datasets/tastypear/lmsys-chat-lewd-minimal
+
     https://huggingface.co/datasets/Himitsui/Lewd-Assistant-v1?not-for-all-audiences=true
 
 2. The context:
