@@ -8,7 +8,7 @@ import json
 class Lover:
     def __init__(self, initial_prompt="", initial_summary="", saved_memory=None):
         self.device = torch.device("cuda:0")
-        self.model = AutoModelForCausalLM.from_pretrained("./tinyllama-finetuned").to(self.device)
+        self.model = AutoModelForCausalLM.from_pretrained("./tinyllama-finetuned/checkpoint-6183").to(self.device)
         self.tokenizer = AutoTokenizer.from_pretrained("TinyLlama/TinyLlama-1.1B-Chat-v1.0", use_fast=True)
         self.generator = pipeline("text-generation", model=self.model, tokenizer=self.tokenizer, device=0)
         self.summarizer = pipeline(
@@ -58,7 +58,7 @@ class Lover:
         num = text.count("\n")
 
         # Get the model output. at the correct position
-        output = self.other_text_model(text)[0]['generated_text'].split("\n")
+        output = self.generator(text)[0]['generated_text'].split("\n")
         output_new = output[num].strip()
 
         # Make sure the output is not blank
@@ -107,13 +107,14 @@ class Lover:
 
         resp = self.get_model_response(text)
 
-        # Sometimes a stupid output will be placed at the
-        # beginning like [Random name]: [words].
-        # let's remove these
-        resp = resp.split(":")[-1].strip()
+        # # Sometimes a stupid output will be placed at the
+        # # beginning like [Random name]: [words].
+        # # let's remove these
+        # resp = resp.split(":")[-1].strip()
 
         # Add the new text to the prompt
-        self.cur_prompt += f"Girlfriend: {resp}\n"
+        # self.cur_prompt += f"Girlfriend: {resp}\n"
+        self.cur_prompt += f"{resp}\n"
 
         # Before returning the respnse, we need to make sure
         # the text is being summarized
@@ -212,7 +213,7 @@ class Lover:
         response = self.get_response()
 
         # Print the response
-        print(f"Girlfriend: {response}")
+        print(response)
 
 initial_summ = "The following is a conversation with me and my waifu girlfriend\n\n"
 initial_prompt = (
@@ -227,4 +228,5 @@ MyLover = Lover(
     initial_summary=initial_summ,
     saved_memory=memory_file
 )
-MyLover.chat()
+while True:
+    MyLover.chat()
