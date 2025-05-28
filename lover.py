@@ -1,3 +1,6 @@
+"""This is a simple chatbot that simulates a conversation with a girlfriend. It is adapted from work done by
+Gabriel Mongaras (https://github.com/gmongaras)."""
+##################### Begin_Citation [1] ######################
 from transformers import AutoModelForCausalLM, AutoTokenizer, pipeline
 from nltk.corpus import stopwords
 from string import punctuation
@@ -214,6 +217,7 @@ class Lover:
 
         # Print the response
         print(response)
+##################### End_Citation [1] ######################
 
 initial_summ = "The following is a conversation with me and my waifu girlfriend\n\n"
 initial_prompt = (

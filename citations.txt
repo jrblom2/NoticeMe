@@ -1,0 +1,2 @@
+Works Cited:
+[1] G. Mongaras. "AI_Girlfriend." Github.com. Accessed: May 28, 2025. [Online]. Available: https://github.com/gmongaras/AI_Girlfriend/blob/master/Girlfriend_Obj.py SHA1: 55b8ade
