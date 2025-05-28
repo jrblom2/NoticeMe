@@ -18,7 +18,7 @@ class Lover:
             framework="pt",
             torch_dtype=torch.float16,
         )
-        
+
         # Set up memory
         self.initial_prompt = initial_prompt
         self.initial_summary = initial_summary
@@ -36,7 +36,7 @@ class Lover:
         if saved_memory is not None:
             self.load_memory(saved_memory)
 
-    def chat(self, prompt):
+    def basic_chat(self, prompt):
         response = self.generator(prompt, max_length=100, do_sample=True, temperature=0.8)
         return response[0]["generated_text"]
 
@@ -197,12 +197,34 @@ class Lover:
         self.past_output = ["" for i in range(self.num_blocks)]
         self.cur_prompt = deepcopy(self.initial_prompt)
 
-lover = Lover()
-prompt = (
-    "The following is a conversation with me and my waifu girlfriend\n\n"
+    def chat(self):
+        """
+        The main chat function. It will return the response
+        from the model.
+        """
+        # Get the input from the user
+        user_input = input("Me: ")
+
+        # Add it to the prompt
+        self.cur_prompt += f"Me: {user_input}\n"
+
+        # Get the response from the model
+        response = self.get_response()
+
+        # Print the response
+        print(f"Girlfriend: {response}")
+
+initial_summ = "The following is a conversation with me and my waifu girlfriend\n\n"
+initial_prompt = (
     "Me: Hello\nGirlfriend: Hello\n"
     "Me: How are you?\nGirlfriend: I am good\n"
     "Me: I love you.\nGirlfriend: I love you too.\n"
     "Me: What should we do now?\n"
 )
-print(lover.chat(prompt))
+memory_file = None
+MyLover = Lover(
+    initial_prompt=initial_prompt,
+    initial_summary=initial_summ,
+    saved_memory=memory_file
+)
+MyLover.chat()
